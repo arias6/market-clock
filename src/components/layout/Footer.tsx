@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { texts } from "@/data/texts";
 import { useLanguageStore } from "@/store/language.store";
-import { Twitter, Linkedin, GithubIcon, Heart, Globe, Mail } from "lucide-react";
+import { GithubIcon, Heart, Globe, Mail } from "lucide-react";
 
 export default function Footer() {
   const { language } = useLanguageStore();

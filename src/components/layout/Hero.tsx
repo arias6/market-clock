@@ -2,11 +2,13 @@
 
 import { texts } from "@/data/texts";
 import { useLanguageStore } from "@/store/language.store";
+import { HeroText } from "@/types/market";
+
 
 export default function Hero() {
   const { language } = useLanguageStore();
   const isRTL = language === "fa";
-  const t = (texts as any).hero[language];
+  const t: HeroText = texts.hero[language];
 
   const scrollToMarkets = () => {
     const section = document.getElementById("market-section");

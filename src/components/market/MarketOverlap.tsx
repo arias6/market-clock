@@ -35,8 +35,8 @@ const MarketOverlap = () => {
       const activeMarkets = stockMarkets.filter((market) => {
         if (!selectedMarkets.includes(market.id)) return false;
 
-        const [openH, openM] = market.openTime.split(":").map(Number);
-        const [closeH, closeM] = market.closeTime.split(":").map(Number);
+        const [openH] = market.openTime.split(":").map(Number);
+        const [closeH] = market.closeTime.split(":").map(Number);
 
         // Convert market hours to user local hours
         const marketToUser = (h: number) =>

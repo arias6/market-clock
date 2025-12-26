@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { useLanguageStore } from "@/store/language.store";
 import { useTimeStore } from "@/store/time.store";
 import { useMarketTimelineStore } from "@/store/marketTimeline.store";
-import { markets } from "@/data/markets";
+import { markets, Market } from "@/data/markets";
 import { texts } from "@/data/texts";
 
 const MarketTimeline = () => {
@@ -53,13 +53,13 @@ const MarketTimeline = () => {
   /**
    * Checks if a market is open based on the user's specific local hour
    */
-  const isMarketOpenAtUserHour = (market: any, userHour: number) => {
+  const isMarketOpenAtUserHour = (market: Market, userHour: number) => {
     const userOffset = -new Date().getTimezoneOffset() / 60;
     const [openH, openM] = market.openTime.split(":").map(Number);
     const [closeH, closeM] = market.closeTime.split(":").map(Number);
 
     const getUserH = (h: number, m: number) => {
-      let totalMins = h * 60 + m - market.utcOffset * 60 + userOffset * 60;
+      const totalMins = h * 60 + m - market.utcOffset * 60 + userOffset * 60;
       return Math.floor(((totalMins + 1440) % 1440) / 60);
     };
 
@@ -81,11 +81,12 @@ const MarketTimeline = () => {
   ) => {
     const [hours, minutes] = marketTimeStr.split(":").map(Number);
     const userOffset = -new Date().getTimezoneOffset() / 60;
-    let totalMinutes =
-      hours * 60 + minutes - marketUtcOffset * 60 + userOffset * 60;
-    totalMinutes = (totalMinutes + 1440) % 1440;
+    const totalMinutes =
+      (hours * 60 + minutes - marketUtcOffset * 60 + userOffset * 60 + 1440) %
+      1440;
     const h = Math.floor(totalMinutes / 60);
     const m = totalMinutes % 60;
+
     return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
   };
 
