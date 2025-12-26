@@ -1,4 +1,4 @@
-import { Market } from "@/src/data/markets";
+import { Market } from "@/data/markets";
 import { formatTime } from "./time";
 
 function parseTime(time: string) {

@@ -1,4 +1,4 @@
-import { markets } from "@/src/data/markets";
+import { markets } from "@/data/markets";
 import { computeMarket } from "./market-time";
 
 export function getComputedMarkets(now: Date) {
